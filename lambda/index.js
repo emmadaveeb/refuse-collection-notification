@@ -15,8 +15,8 @@ exports.handler = async () => {
     const { data: collectionResponse } = await axios.get(`${collectionApi}${locationId}`);
     const collectionDates = collectionResponse.Results.Refuse_collection_dates;
 
-    const nextRecyclingCollection = new Date(collectionDates.find(item => item['_'].includes('Dry Recycling')).Next_Collection).toISOString().slice(5,10);
-    const nextRefuseCollection = new Date(collectionDates.find(item => item['_'].includes('Refuse Collection')).Next_Collection).toISOString().slice(5,10);
+    const nextRecyclingCollection = new Date(collectionDates.find(item => item['_'].includes('Dry Recycling')).Next_Collection).toISOString().slice(5, 10);
+    const nextRefuseCollection = new Date(collectionDates.find(item => item['_'].includes('Refuse Collection')).Next_Collection).toISOString().slice(5, 10);
 
     let Message = '';
     tomorrow === nextRecyclingCollection ? Message += 'Your dry recycling is being collected tomorrow.' : null;
@@ -31,7 +31,9 @@ exports.handler = async () => {
         }
         console.log('Sending notification message', { parameters });
         await sns.publish(parameters).promise();
+        return;
     }
 
+    console.log('No collections scheduled for tomorrow.');
     return;
 }
