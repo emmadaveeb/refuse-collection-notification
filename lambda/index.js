@@ -7,7 +7,7 @@ exports.handler = async () => {
     const { data } = await axios.get(`${locationApi}${postCode}`);
     const addresses = data.data;
     const location = addresses.find(item => item[2].includes(doorNumber));
-    const tomorrow = add(new Date(), { days: 1 }).toISOString().slice(5,10);
+    const tomorrow = add(new Date(), { days: 1 }).toISOString().slice(5, 10);
 
     if(!location) throw new Error('Location not found.');
 
