@@ -12,4 +12,4 @@ An event rule is created that schedules the lambda to run at 7pm each day sun-fr
 
 - If the next day is both a refuse and dry recycling collection day, the text will contain the message:
 
-    'Your dry recycling is being collected tomorrow. Your refuse collection day is tomorrow.'
+    'Your dry recycling & refuse is being collected tomorrow.'

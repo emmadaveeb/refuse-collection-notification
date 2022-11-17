@@ -19,9 +19,9 @@ exports.handler = async () => {
     const nextRefuseCollection = new Date(collectionDates.find(item => item['_'].includes('Refuse Collection')).Next_Collection).toISOString().slice(5, 10);
 
     let Message = '';
-    tomorrow === nextRecyclingCollection ? Message += 'Your dry recycling is being collected tomorrow.' : null;
+    tomorrow === nextRecyclingCollection ? Message = 'Your dry recycling is being collected tomorrow.' : null;
     tomorrow === nextRefuseCollection ? 
-        (Message ? Message += ' Your refuse collection day is tomorrow.' : Message += 'Your refuse collection day is tomorrow.') : null;
+        (Message ? Message = 'Your dry recycling & refuse is being collected tomorrow.' : Message += 'Your refuse collection day is tomorrow.') : null;
 
     if(Message) {
         const sns = new AWS.SNS();
