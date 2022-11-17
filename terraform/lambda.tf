@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "refuse_collection" {
-  filename      = "../refuse-collection-lambda.zip"
+  filename      = "../refuse-collection.zip"
   function_name = "refuse-collection-notification"
   role          = aws_iam_role.lambda_role.arn
   handler       = "index.handler"
@@ -15,5 +15,11 @@ resource "aws_lambda_function" "refuse_collection" {
       postCode      = ""
     }
   }
+  layers = [ aws_lambda_layer_version.lambda_layer.arn ]
+}
 
+resource "aws_lambda_layer_version" "lambda_layer" {
+  filename   = "../refuse-collection-node-modules.zip"
+  layer_name = "refuse-collection-node-modules"
+  compatible_runtimes = ["nodejs14.x"]
 }
