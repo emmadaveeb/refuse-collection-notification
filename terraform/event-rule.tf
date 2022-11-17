@@ -1,7 +1,7 @@
 resource "aws_cloudwatch_event_rule" "schedule" {
   name                = "schedule-refuse-collection-notification-lambda"
   description         = "Schedule refuse collection lambda every weekday"
-  schedule_expression = "cron(0 0 ? * mon-fri *)"
+  schedule_expression = "cron(0 19 ? * sun-fri *)"
 }
 
 resource "aws_cloudwatch_event_target" "lambda" {
